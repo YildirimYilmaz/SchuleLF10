@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TechNova Micro-Cloud Node</title>
+<style>
+html,body{margin:0;height:100%;background:#000;overflow:hidden;font-family:"Courier New",monospace}
+canvas{position:fixed;inset:0;z-index:0}
+.card{position:relative;z-index:1;max-width:560px;margin:12vh auto 0;padding:32px;
+  background:rgba(0,10,0,.82);border:1px solid #00ff41;box-shadow:0 0 30px #00ff41;color:#00ff41}
+h1{margin:0 0 16px;font-size:1.6rem;text-shadow:0 0 8px #00ff41}
+p{margin:8px 0}
+code{background:#022;padding:2px 6px;color:#9dffb0}
+.cursor{animation:b 1s steps(1) infinite}
+@keyframes b{50%{opacity:0}}
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+<div class="card">
+  <h1>&gt; TechNova Node von: Yilmaz<span class="cursor">_</span></h1>
+  <p>Status: <strong>ONLINE</strong> (Ubuntu 26.04 LXC + Docker Compose)</p>
+  <p>Container: CT269</p>
+  <p>komm-IP: <code>172.31.0.133:8080</code></p>
+  <p>Wake up, Yilmaz... the Micro-Cloud has you.</p>
+</div>
+<script>
+const c=document.getElementById("c"),x=c.getContext("2d");
+function r(){c.width=innerWidth;c.height=innerHeight}
+r();addEventListener("resize",r);
+const ch="アイウエオカキクケコサシスセソ0123456789ABCDEF";
+let d=[];
+function draw(){
+  const cols=Math.floor(c.width/16);
+  while(d.length<cols)d.push(Math.random()*-50);
+  x.fillStyle="rgba(0,0,0,.08)";x.fillRect(0,0,c.width,c.height);
+  x.fillStyle="#00ff41";x.font="16px monospace";
+  for(let i=0;i<cols;i++){
+    x.fillText(ch[Math.floor(Math.random()*ch.length)],i*16,d[i]*16);
+    if(d[i]*16>c.height&&Math.random()>.975)d[i]=0;
+    d[i]++;
+  }
+}
+setInterval(draw,50);
+</script>
+</body>
+</html>
